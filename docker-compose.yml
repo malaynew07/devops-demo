@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  registry:
+    image: registry:2
+    ports:
+      - "5001:5000"
+    volumes:
+      - registry_data:/var/lib/registry
+
+  app:
+    build: .
+    image: localhost:5001/devops-demo:latest
+    ports:
+      - "5000:5000"
+    depends_on:
+      - registry
+
+volumes:
+  registry_data:
+
